@@ -4,14 +4,22 @@ import { CatalogComponent } from './catalog.component';
 import { FiltersComponent } from './filters/filters.component';
 import { SearchComponent } from './search/search.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
 @NgModule({
   declarations: [CatalogComponent, FiltersComponent, SearchComponent],
-    imports: [
-        CommonModule,
-        MatCardModule
-    ]
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatButtonModule
+  ]
 })
 export class CatalogModule { }
