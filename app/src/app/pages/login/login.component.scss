@@ -1,0 +1,40 @@
+.login-box {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 50px;
+
+}
+
+.login-card {
+  width: 300px;
+
+  padding-bottom: 20px;
+
+  .mat-card {
+    &-header {
+      display: flex;
+      justify-content: center;
+
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    &-actions {
+      display: flex;
+      justify-content: center;
+    }
+
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

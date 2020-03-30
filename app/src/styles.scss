@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/theming";
+
+
+html, body {height: 100%; }
+body {
+  height: 100%;
+
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+
+  background: map-get($mat-dark-theme-background, "background");
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.wrapper {
+  height: 100%;
+}

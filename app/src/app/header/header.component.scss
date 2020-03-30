@@ -1,0 +1,18 @@
+@import "~@angular/material/theming";
+
+.header {
+  display: flex;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  z-index: 100;
+
+  width: 100%;
+
+  padding: 10px 20px;
+
+  background: map-get( $mat-purple, 500);
+}

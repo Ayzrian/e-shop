@@ -1,0 +1,36 @@
+<header
+  class="header mat-elevation-z6"
+>
+  <nav>
+    <button mat-button routerLink="catalog">
+       <b>Catalog</b>
+    </button>
+  </nav>
+
+  <div class="flex-spacer">
+  </div>
+
+
+  <button
+    class="pr-2"
+    [routerLink]="'basket'"
+    mat-icon-button
+  >
+    <mat-icon>
+      shopping_cart
+    </mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="login"> Login</button>
+    <button mat-menu-item routerLink="sign-up"> Sign up</button>
+  </mat-menu>
+
+  <button mat-icon-button
+    [matMenuTriggerFor]="userMenu"
+  >
+    <mat-icon>
+      person
+    </mat-icon>
+  </button>
+</header>
