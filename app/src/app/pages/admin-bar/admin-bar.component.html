@@ -12,12 +12,13 @@
         </mat-icon>
         <a
           [routerLink]="link.route"
+          routerLinkActive="active"
           matLine
         > {{link.text}}</a>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="mt-5">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

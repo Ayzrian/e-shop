@@ -1,0 +1,13 @@
+
+.products {
+  display: flex;
+  justify-content: center;
+
+
+  table {
+    min-width: 600px;
+    max-width: 900px;
+
+    margin-left: 30px;
+  }
+}

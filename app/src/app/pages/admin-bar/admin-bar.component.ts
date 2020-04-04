@@ -21,7 +21,7 @@ export class AdminBarComponent implements OnInit {
     icon: 'add_circle'
   }, {
     text: 'Statistics',
-    route: 'statics',
+    route: 'statistics',
     icon: 'assessment'
   }];
 
