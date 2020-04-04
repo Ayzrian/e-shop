@@ -1,0 +1,23 @@
+<mat-sidenav-container class="admin-bar">
+  <mat-sidenav mode="side" opened="true" class="side-bar">
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let link of links"
+      >
+        <mat-icon
+          *ngIf="link.icon"
+          matListIcon
+        >
+          {{link.icon}}
+        </mat-icon>
+        <a
+          [routerLink]="link.route"
+          matLine
+        > {{link.text}}</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

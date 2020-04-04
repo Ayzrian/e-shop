@@ -16,6 +16,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {BasketModule} from './pages/basket/basket.module';
 import {CatalogModule} from './pages/catalog/catalog.module';
+import {AdminBarModule} from './pages/admin-bar/admin-bar.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import {CatalogModule} from './pages/catalog/catalog.module';
     SignUpModule,
     BasketModule,
     CatalogModule,
-    MatMomentDateModule
+    AdminBarModule,
+    MatMomentDateModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     MatMomentDateModule,

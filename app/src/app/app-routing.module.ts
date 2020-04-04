@@ -4,6 +4,7 @@ import {LoginComponent} from './pages/login/login.component';
 import {SignUpComponent} from './pages/sign-up/sign-up.component';
 import {BasketComponent} from './pages/basket/basket.component';
 import {CatalogComponent} from './pages/catalog/catalog.component';
+import {AdminBarComponent} from './pages/admin-bar/admin-bar.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'catalog',
     component: CatalogComponent
+  },
+  {
+    path: 'admin',
+    component: AdminBarComponent
   }
 ];
 
