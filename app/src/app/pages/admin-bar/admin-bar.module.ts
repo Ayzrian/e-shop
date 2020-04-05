@@ -16,6 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -25,20 +26,21 @@ import {FormsModule} from '@angular/forms';
     NewProductComponent,
     StatisticsComponent,
   ],
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    RouterModule,
-    MatTreeModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    FormsModule,
-  ],
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        RouterModule,
+        MatTreeModule,
+        MatTableModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        FormsModule,
+        MatPaginatorModule,
+    ],
 })
 export class AdminBarModule {
 }

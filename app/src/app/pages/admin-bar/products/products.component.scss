@@ -4,10 +4,14 @@
   justify-content: center;
 
 
-  table {
+  .table-wrapper {
     min-width: 600px;
     max-width: 900px;
 
     margin-left: 30px;
+
+    table {
+      width: 100%;
+    }
   }
 }
