@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { BasketComponent } from './basket.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -11,7 +14,10 @@ import {MatDividerModule} from '@angular/material/divider';
   imports: [
     CommonModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule,
+    MatListModule,
+    MatIconModule
   ]
 })
 export class BasketModule { }

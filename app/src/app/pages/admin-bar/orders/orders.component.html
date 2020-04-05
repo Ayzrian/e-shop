@@ -1,4 +1,64 @@
 <section class="orders">
-  <table mat-table>
-  </table>
+  <mat-accordion multi="true">
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        Id
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>
+          Id
+        </mat-label>
+        <input type="text" matInput />
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        Customer
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>
+          Customer
+        </mat-label>
+        <input type="text" matInput />
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        Status
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>
+          Status
+        </mat-label>
+        <mat-select>
+          <mat-option value="PENDING PAYMENT">PENDING PAYMENT</mat-option>
+          <mat-option value="PENDING SHIPPING">PENDING SHIPPING</mat-option>
+          <mat-option value="CANCELED">CANCELED</mat-option>
+          <mat-option value="SHIPPED">SHIPPED</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z4">
+      <mat-text-column name="id"></mat-text-column>
+      <mat-text-column name="customer"></mat-text-column>
+      <mat-text-column name="price"></mat-text-column>
+      <mat-text-column name="status"></mat-text-column>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="10" showFirstLastButtons></mat-paginator>
+  </div>
 </section>

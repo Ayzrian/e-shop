@@ -9,16 +9,21 @@ import {OrdersComponent} from './pages/admin-bar/orders/orders.component';
 import {ProductsComponent} from './pages/admin-bar/products/products.component';
 import {NewProductComponent} from './pages/admin-bar/new-product/new-product.component';
 import {StatisticsComponent} from './pages/admin-bar/statistics/statistics.component';
-
+import {ProductComponent} from './pages/product/product.component';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'catalog',
+  },
+  {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'sign-up',
-    component: SignUpComponent
+    component: SignUpComponent,
   },
   {
     path: 'basket',
@@ -26,12 +31,21 @@ const routes: Routes = [
   },
   {
     path: 'catalog',
-    component: CatalogComponent
+    component: CatalogComponent,
+  },
+  {
+    path: 'product/:id',
+    component: ProductComponent,
   },
   {
     path: 'admin',
     component: AdminBarComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'orders',
+      },
       {
         path: 'orders',
         component: OrdersComponent,
@@ -49,12 +63,12 @@ const routes: Routes = [
         component: StatisticsComponent,
       },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
 }

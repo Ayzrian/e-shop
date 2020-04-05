@@ -1,0 +1,13 @@
+.basket {
+  display: flex;
+
+  justify-content: center;
+
+  .mat-card {
+    width: 600px;
+
+    ::ng-deep &-header-text {
+      display: none;
+    }
+  }
+}

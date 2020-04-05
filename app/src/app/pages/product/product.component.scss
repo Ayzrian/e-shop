@@ -1,0 +1,36 @@
+.product {
+  display: flex;
+
+  justify-content: center;
+
+  .product_card {
+    width: 400px;
+
+    img {
+      width: 260px;
+
+      margin: 0 auto;
+    }
+  }
+
+  .characteristic {
+    margin: 0;
+
+    padding-top: 10px;
+
+    .flex-spacer {
+      border-bottom: 1px white dashed;
+    }
+  }
+
+  .actions {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price {
+    font-size: 1.1rem;
+  }
+}

@@ -8,18 +8,20 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
+import {RouterModule} from '@angular/router';
 
 
 
 @NgModule({
   declarations: [CatalogComponent, FiltersComponent, SearchComponent],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        RouterModule
+    ]
 })
 export class CatalogModule { }

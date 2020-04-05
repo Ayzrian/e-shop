@@ -18,12 +18,11 @@ import {BasketModule} from './pages/basket/basket.module';
 import {CatalogModule} from './pages/catalog/catalog.module';
 import {AdminBarModule} from './pages/admin-bar/admin-bar.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {ProductModule} from './pages/product/product.module';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,16 +38,18 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     CatalogModule,
     AdminBarModule,
     MatMomentDateModule,
-    MatProgressSpinnerModule
+    ProductModule,
+    MatProgressSpinnerModule,
+    MatBadgeModule,
   ],
   providers: [
     MatMomentDateModule,
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true }
-    }
+      useValue: {showError: true},
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
