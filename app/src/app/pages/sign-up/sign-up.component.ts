@@ -5,32 +5,45 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
   personalDataForm: FormGroup;
   addressForm: FormGroup;
   paymentForm: FormGroup;
 
-  sexOptions = [{
-    value: 'M',
-    label: 'Male'
-  }, {
-    value: 'F',
-    label: 'Female'
-  }
+  sexOptions = [
+    {
+      value: 'M',
+      label: 'Male',
+    },
+    {
+      value: 'F',
+      label: 'Female',
+    },
   ];
 
-
-  constructor(
-    private fb: FormBuilder
-  ) {
+  constructor(private fb: FormBuilder) {
     this.personalDataForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
       dateOfBirth: [moment.now(), [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      sex: ['M', [Validators.required]]
+      sex: ['M', [Validators.required]],
     });
 
     this.addressForm = this.fb.group({
@@ -38,23 +51,43 @@ export class SignUpComponent implements OnInit {
       city: ['', [Validators.required, Validators.minLength(3)]],
       street: ['', [Validators.required, Validators.minLength(3)]],
       building: ['', [Validators.required, Validators.minLength(1)]],
+      // TODO: may  be should remove validator
       flat: ['', [Validators.minLength(1)]],
     });
 
     this.paymentForm = this.fb.group({
-      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
-      expirationDate: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-      cvv: ['', Validators.required, Validators.minLength(3), Validators.maxLength(3)]
+      cardNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(16),
+          Validators.maxLength(16),
+        ],
+      ],
+      expirationDate: [
+        '',
+        [Validators.required, Validators.minLength(5), Validators.maxLength(5)],
+      ],
+      cvv: [
+        '',
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(3),
+      ],
     });
   }
-
 
   isInvalid(form: FormGroup, control: string): boolean {
     console.log(this.personalDataForm.invalid);
     return form.controls[control].invalid;
   }
 
-  getErrorMessage(form: FormGroup, control: string, minLength = 3, maxLength = 20): string {
+  getErrorMessage(
+    form: FormGroup,
+    control: string,
+    minLength = 3,
+    maxLength = 20
+  ): string {
     const {errors} = form.controls[control];
     if (errors) {
       if (errors.required) {
@@ -76,11 +109,14 @@ export class SignUpComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-    return this.addressForm.invalid || this.personalDataForm.invalid || this.paymentForm.invalid;
+    return (
+      this.addressForm.invalid ||
+      this.personalDataForm.invalid ||
+      this.paymentForm.invalid
+    );
   }
 
   signUp() {
-
     // TODO: implement login page!
 
     this.personalDataForm.reset();
@@ -90,5 +126,4 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
