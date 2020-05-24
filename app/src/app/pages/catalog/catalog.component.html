@@ -1,137 +1,61 @@
 <div class="catalog mt-5">
-  <div class="catalog__search">
-
-  </div>
+  <div class="catalog__search"></div>
 
   <div class="catalog__l-box">
     <div class="catalog__sidebar">
-      <mat-accordion multi="true">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>Filter 1</mat-expansion-panel-header>
-
-          <mat-checkbox>Filter smth!</mat-checkbox>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>Filter 2</mat-expansion-panel-header>
-
-          <mat-checkbox>Filter smth!</mat-checkbox>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>Filter 3</mat-expansion-panel-header>
-
-          <mat-checkbox>Filter smth!</mat-checkbox>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>Filter 4</mat-expansion-panel-header>
-
-          <mat-checkbox>Filter smth!</mat-checkbox>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <app-filters
+        [filters]="filtersMeta"
+        (query)="onFiltersChange($event)"
+        (search)="onSearch()"
+      >
+      </app-filters>
     </div>
+
+    <mat-card class="w-100 message" *ngIf="products.length === 0">
+      <mat-card-content>
+        У нас пока еще нету продуктов. Приходите позже.
+      </mat-card-content>
+    </mat-card>
+
     <div class="catalog__list">
-      <mat-card class="catalog__item">
+      <mat-card
+        class="catalog__item"
+        *ngFor="let product of products; trackBy: trackProductById"
+      >
         <mat-card-header>
-          <mat-card-title>Redmi A8</mat-card-title>
-          <mat-card-subtitle class="subtitle">Xiomi</mat-card-subtitle>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle class="subtitle">{{
+            product.brand
+            }}</mat-card-subtitle>
         </mat-card-header>
 
         <img
           mat-card-image
-          src="https://i.citrus.ua/uploads/shop/a/1/a1b9d4beb6ca736693803475ae8fd57a.jpg"
-          alt="Photo of Redmi A8"
-        >
+          src="{{ product.imagePath }}"
+          alt="Photo of {{ product.name }}"
+        />
 
         <mat-card-actions class="row-between">
           <div>
-            <button mat-raised-button color="accent">Buy</button>
-            <button mat-raised-button color="primary" [routerLink]="['/product', 12]">Details</button>
+            <button
+              mat-raised-button
+              color="primary"
+              [routerLink]="['/product', product.id]"
+            >
+              Details
+            </button>
           </div>
-          <b class="price">55$</b>
+          <b class="price">{{ product.price }}$</b>
         </mat-card-actions>
       </mat-card>
-      <mat-card class="catalog__item">
-        <mat-card-header>
-          <mat-card-title>Redmi A8</mat-card-title>
-          <mat-card-subtitle class="subtitle">Xiomi</mat-card-subtitle>
-        </mat-card-header>
 
-        <img
-          mat-card-image
-          src="https://i.citrus.ua/uploads/shop/a/1/a1b9d4beb6ca736693803475ae8fd57a.jpg"
-          alt="Photo of Redmi A8"
-        >
-
-        <mat-card-actions class="row-between">
-          <div>
-            <button mat-raised-button color="accent">Buy</button>
-            <button mat-raised-button color="primary"  [routerLink]="['/product', 62]" >Details</button>
-          </div>
-          <b class="price">55$</b>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="catalog__item">
-        <mat-card-header>
-          <mat-card-title>Redmi A8</mat-card-title>
-          <mat-card-subtitle class="subtitle">Xiomi</mat-card-subtitle>
-        </mat-card-header>
-
-        <img
-          mat-card-image
-          src="https://i.citrus.ua/uploads/shop/a/1/a1b9d4beb6ca736693803475ae8fd57a.jpg"
-          alt="Photo of Redmi A8"
-        >
-
-        <mat-card-actions class="row-between">
-          <div>
-            <button mat-raised-button color="accent">Buy</button>
-            <button mat-raised-button color="primary" [routerLink]="['/product', 76]" >Details</button>
-          </div>
-          <b class="price">55$</b>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="catalog__item">
-        <mat-card-header>
-          <mat-card-title>Redmi A8</mat-card-title>
-          <mat-card-subtitle class="subtitle">Xiomi</mat-card-subtitle>
-        </mat-card-header>
-
-        <img
-          mat-card-image
-          src="https://i.citrus.ua/uploads/shop/a/1/a1b9d4beb6ca736693803475ae8fd57a.jpg"
-          alt="Photo of Redmi A8"
-        >
-
-
-        <mat-card-actions class="row-between">
-          <div>
-            <button mat-raised-button color="accent">Buy</button>
-            <button mat-raised-button color="primary" [routerLink]="['/product', 632]" >Details</button>
-          </div>
-          <b class="price">55$</b>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="catalog__item">
-        <mat-card-header>
-          <mat-card-title>Redmi A8</mat-card-title>
-          <mat-card-subtitle class="subtitle">Xiomi</mat-card-subtitle>
-        </mat-card-header>
-
-        <img
-          mat-card-image
-          src="https://i.citrus.ua/uploads/shop/a/1/a1b9d4beb6ca736693803475ae8fd57a.jpg"
-          alt="Photo of Redmi A8"
-        >
-
-
-        <mat-card-actions class="row-between">
-          <div>
-            <button mat-raised-button color="accent">Buy</button>
-            <button mat-raised-button color="primary" [routerLink]="['/product', 2]" >Details</button>
-          </div>
-          <b class="price">55$</b>
-        </mat-card-actions>
-      </mat-card>
+      <div class="row w-100 justify-content-center" *ngIf="products.length > 0">
+        <button mat-raised-button color="accent" (click)="onLoadMore()">
+          Загрузить еще
+        </button>
+      </div>
     </div>
   </div>
-
 </div>
+
+<app-loader [active]="loading"></app-loader>

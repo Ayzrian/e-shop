@@ -1,266 +1,217 @@
 <mat-card class="sign-up mt-5">
   <mat-card-header class="sign-up__header">
-    <b>Sign-up</b>
+    <b>Зарегистрироваться</b>
   </mat-card-header>
   <mat-card-content>
     <mat-vertical-stepper linear>
       <mat-step [stepControl]="personalDataForm" editable>
-        <ng-template matStepLabel>Personal Information</ng-template>
+        <ng-template matStepLabel>Персональные данные</ng-template>
 
         <form [formGroup]="personalDataForm">
-
           <div>
             <mat-form-field>
-              <mat-label>First name</mat-label>
-              <input
-                formControlName="firstName"
-                matInput
-                type="text"
-                placeholder="First name"
-              >
-              <mat-error
-                *ngIf="isInvalid(personalDataForm, 'firstName')"
-              >
-                {{getErrorMessage(personalDataForm, 'firstName')}}
+              <mat-label>Имя</mat-label>
+              <input formControlName="firstName" matInput type="text" />
+              <mat-error *ngIf="isInvalid(personalDataForm, 'firstName')">
+                {{ getErrorMessage(personalDataForm, "firstName") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Last name</mat-label>
-              <input
-                formControlName="lastName"
-                matInput
-                type="text"
-                placeholder="Last name"
-              >
-              <mat-error
-                *ngIf="isInvalid(personalDataForm, 'lastName')"
-              >
-                {{getErrorMessage(personalDataForm, 'lastName')}}
+              <mat-label>Фамилия</mat-label>
+              <input formControlName="lastName" matInput type="text" />
+              <mat-error *ngIf="isInvalid(personalDataForm, 'lastName')">
+                {{ getErrorMessage(personalDataForm, "lastName") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Email</mat-label>
-              <input
-                formControlName="email"
-                matInput
-                type="email"
-                placeholder="First name"
-              >
-              <mat-error
-                *ngIf="isInvalid(personalDataForm, 'email')"
-              >
-                {{getErrorMessage(personalDataForm, 'email')}}
+              <mat-label>Електронная почта</mat-label>
+              <input formControlName="email" matInput type="email" />
+              <mat-error *ngIf="isInvalid(personalDataForm, 'email')">
+                {{ getErrorMessage(personalDataForm, "email") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Date of birth</mat-label>
+              <mat-label>Номер Телефона</mat-label>
+              <input formControlName="phoneNumber" matInput type="text" />
+              <mat-error *ngIf="isInvalid(personalDataForm, 'phoneNumber')">
+                {{ getErrorMessage(personalDataForm, "phoneNumber") }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <mat-label>Пароль</mat-label>
+              <input formControlName="password" type="password" matInput />
+              <mat-error *ngIf="isInvalid(personalDataForm, 'password')">
+                {{ getErrorMessage(personalDataForm, "password", 6) }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <mat-label>Дата рождения</mat-label>
               <input
                 formControlName="dateOfBirth"
                 matInput
                 [matDatepicker]="picker"
-              >
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-              <mat-error
-                *ngIf="isInvalid(personalDataForm, 'dateOfBirth')"
-              >
-                {{getErrorMessage(personalDataForm, 'dateOfBirth')}}
+              <mat-error *ngIf="isInvalid(personalDataForm, 'dateOfBirth')">
+                {{ getErrorMessage(personalDataForm, "dateOfBirth") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Sex</mat-label>
+              <mat-label>Пол</mat-label>
               <mat-select formControlName="sex">
-                <mat-option *ngFor="let option of sexOptions" [value]="option.value">
-                  {{option.label}}
+                <mat-option
+                  *ngFor="let option of sexOptions"
+                  [value]="option.value"
+                >
+                  {{ option.label }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-
           </div>
           <div>
-            <button mat-raised-button matStepperNext [disabled]="personalDataForm.invalid">Next</button>
+            <button
+              mat-raised-button
+              matStepperNext
+              [disabled]="personalDataForm.invalid"
+            >
+              Дальше
+            </button>
           </div>
-
         </form>
       </mat-step>
       <mat-step [stepControl]="addressForm" editable>
-        <ng-template matStepLabel>Address</ng-template>
+        <ng-template matStepLabel>Аддрес</ng-template>
         <form [formGroup]="addressForm">
-
           <div>
             <mat-form-field>
-              <mat-label>Country</mat-label>
-              <input
-                formControlName="country"
-                matInput
-                type="text"
-                placeholder="Country"
-              >
-              <mat-error
-                *ngIf="isInvalid(addressForm, 'country')"
-              >
-                {{getErrorMessage(addressForm, 'country')}}
+              <mat-label>Страна</mat-label>
+              <input formControlName="country" matInput type="text" />
+              <mat-error *ngIf="isInvalid(addressForm, 'country')">
+                {{ getErrorMessage(addressForm, "country") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>City</mat-label>
-              <input
-                formControlName="city"
-                matInput
-                type="text"
-                placeholder="City"
-              >
-              <mat-error
-                *ngIf="isInvalid(addressForm, 'city')"
-              >
-                {{getErrorMessage(addressForm, 'city')}}
+              <mat-label>Город</mat-label>
+              <input formControlName="city" matInput type="text" />
+              <mat-error *ngIf="isInvalid(addressForm, 'city')">
+                {{ getErrorMessage(addressForm, "city") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Street</mat-label>
-              <input
-                formControlName="street"
-                matInput
-                type="text"
-                placeholder="Street"
-              >
-              <mat-error
-                *ngIf="isInvalid(addressForm, 'street')"
-              >
-                {{getErrorMessage(addressForm, 'street')}}
+              <mat-label>Улица</mat-label>
+              <input formControlName="street" matInput type="text" />
+              <mat-error *ngIf="isInvalid(addressForm, 'street')">
+                {{ getErrorMessage(addressForm, "street") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Building</mat-label>
-              <input
-                formControlName="building"
-                matInput
-                type="text"
-                placeholder="Building"
-              >
-              <mat-error
-                *ngIf="isInvalid(addressForm, 'building')"
-              >
-                {{getErrorMessage(addressForm, 'building')}}
+              <mat-label>Здание</mat-label>
+              <input formControlName="building" matInput type="text" />
+              <mat-error *ngIf="isInvalid(addressForm, 'building')">
+                {{ getErrorMessage(addressForm, "building") }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Flat (optional)</mat-label>
-              <input
-                formControlName="flat"
-                matInput
-                type="text"
-                placeholder="flat"
-              >
-              <mat-error
-                *ngIf="isInvalid(addressForm, 'flat')"
-              >
-                {{getErrorMessage(addressForm, 'flat')}}
+              <mat-label>Квартира (опционально)</mat-label>
+              <input formControlName="flat" matInput type="text" />
+              <mat-error *ngIf="isInvalid(addressForm, 'flat')">
+                {{ getErrorMessage(addressForm, "flat") }}
               </mat-error>
             </mat-form-field>
           </div>
-
         </form>
         <div>
-          <button mat-raised-button matStepperNext>Next</button>
+          <button mat-raised-button matStepperNext>Дальше</button>
         </div>
       </mat-step>
       <mat-step editable>
-        <ng-template matStepLabel>Payment information</ng-template>
+        <ng-template matStepLabel>Платежная информация</ng-template>
         <form [formGroup]="paymentForm">
-
           <div>
             <mat-form-field>
-              <mat-label>Card number</mat-label>
+              <mat-label>Номер карточки</mat-label>
               <input
                 formControlName="cardNumber"
                 matInput
                 type="text"
                 placeholder="Card number"
-              >
-              <mat-error
-                *ngIf="isInvalid(paymentForm, 'cardNumber')"
-              >
-                {{getErrorMessage(paymentForm, 'cardNumber', 16, 20)}}
+              />
+              <mat-error *ngIf="isInvalid(paymentForm, 'cardNumber')">
+                {{ getErrorMessage(paymentForm, "cardNumber", 16, 16) }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>Expiration date</mat-label>
-              <input
-                formControlName="expirationDate"
-                matInput
-                type="text"
-                placeholder="Expiration date"
-              >
-              <mat-error
-                *ngIf="isInvalid(paymentForm, 'expirationDate')"
-              >
-                {{getErrorMessage(paymentForm, 'expirationDate')}}
+              <mat-label>Действительна до</mat-label>
+              <input formControlName="expirationDate" matInput type="text" />
+              <mat-error *ngIf="isInvalid(paymentForm, 'expirationDate')">
+                {{ getErrorMessage(paymentForm, "expirationDate", 5, 5) }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <mat-label>CVV</mat-label>
-              <input
-                formControlName="cvv"
-                matInput
-                type="text"
-                placeholder="CVV"
-              >
-              <mat-error
-                *ngIf="isInvalid(paymentForm, 'cvv')"
-              >
-                {{getErrorMessage(paymentForm, 'cvv')}}
+              <mat-label>CVV код</mat-label>
+              <input formControlName="cvv" matInput type="text" />
+              <mat-error *ngIf="isInvalid(paymentForm, 'cvv')">
+                {{ getErrorMessage(paymentForm, "cvv", 3, 3) }}
               </mat-error>
             </mat-form-field>
           </div>
-
         </form>
         <div>
-          <button mat-raised-button matStepperNext>Next</button>
+          <button mat-raised-button matStepperNext>Дальше</button>
         </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Complete</ng-template>
+        <ng-template matStepLabel>Закончить</ng-template>
         <div>
           <button
             mat-raised-button
             [disabled]="isFormValid()"
             (click)="signUp()"
-          >Send!
+          >
+            Отправить!
           </button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
-
   </mat-card-content>
 </mat-card>

@@ -1,38 +1,51 @@
-<header
-  class="header mat-elevation-z6"
->
+<header class="header mat-elevation-z6">
   <nav>
     <button mat-button routerLink="catalog">
-       <b>Catalog</b>
+      <b>Каталог</b>
     </button>
 
-    <button mat-button routerLink="admin">
-      <b>Admin</b>
+    <button *ngIf="isUserAdmin$ | async" mat-button routerLink="admin">
+      <b>Панель администратора</b>
+    </button>
+
+    <button
+      mat-button
+      routerLink="track-order"
+    >
+      Отследить заказ
     </button>
   </nav>
 
-  <div class="flex-spacer">
-  </div>
+  <div class="flex-spacer"></div>
 
-
-  <button
-    class="pr-2"
-    [routerLink]="'basket'"
-    mat-icon-button
-  >
-    <mat-icon matBadge="3">
+  <button class="pr-2" [routerLink]="'basket'" mat-icon-button>
+    <mat-icon matBadge="{{ total$ | async }}">
       shopping_cart
     </mat-icon>
   </button>
 
   <mat-menu #userMenu="matMenu">
-    <button mat-menu-item routerLink="login"> Login</button>
-    <button mat-menu-item routerLink="sign-up"> Sign up</button>
+    <ng-container *ngIf="!(isUserAuthorized$ | async); else elseBlock">
+      <button mat-menu-item routerLink="login">
+        Логин
+      </button>
+      <button mat-menu-item routerLink="sign-up">
+        Зарегистрироваться
+      </button>
+    </ng-container>
+
+    <ng-template #elseBlock>
+      <button mat-menu-item routerLink="profile">
+        Профиль
+      </button>
+
+      <button mat-menu-item (click)="onLogout()">
+        Выйти из аккаунта
+      </button>
+    </ng-template>
   </mat-menu>
 
-  <button mat-icon-button
-    [matMenuTriggerFor]="userMenu"
-  >
+  <button mat-icon-button [matMenuTriggerFor]="userMenu">
     <mat-icon>
       person
     </mat-icon>

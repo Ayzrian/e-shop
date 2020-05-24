@@ -21,7 +21,11 @@
 
   &__item {
     width:  225px;
-    height: 350px;
+    min-height: 350px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     margin-bottom: 20px;
     margin-right: 5px;
@@ -47,4 +51,8 @@
       font-size: 1.1rem;
     }
   }
+}
+
+.message {
+  height: min-content;
 }

@@ -10,6 +10,11 @@ import {ProductsComponent} from './pages/admin-bar/products/products.component';
 import {NewProductComponent} from './pages/admin-bar/new-product/new-product.component';
 import {StatisticsComponent} from './pages/admin-bar/statistics/statistics.component';
 import {ProductComponent} from './pages/product/product.component';
+import {NewTypeComponent} from './pages/admin-bar/new-type/new-type.component';
+import {TrackOrderComponent} from './pages/track-order/track-order.component';
+import {ProfileComponent} from './pages/profile/profile.component';
+import {IsAdminGuard} from './guards/is-admin.guard';
+import {IsAuthorizedGuard} from './guards/is-authorized.guard';
 
 const routes: Routes = [
   {
@@ -38,8 +43,18 @@ const routes: Routes = [
     component: ProductComponent,
   },
   {
+    path: 'track-order',
+    component: TrackOrderComponent,
+  },
+  {
+    path: 'profile',
+    canActivate: [IsAuthorizedGuard],
+    component: ProfileComponent,
+  },
+  {
     path: 'admin',
     component: AdminBarComponent,
+    canActivate: [IsAuthorizedGuard, IsAdminGuard],
     children: [
       {
         path: '',
@@ -61,6 +76,10 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent,
+      },
+      {
+        path: 'new-type',
+        component: NewTypeComponent,
       },
     ],
   },

@@ -1,4 +1,5 @@
-import { AllowNull, Column, Model, Table } from 'sequelize-typescript';
+import { AllowNull, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { User } from './user.model';
 
 @Table
 export class Address extends Model<Address> {
@@ -14,7 +15,13 @@ export class Address extends Model<Address> {
   @Column
   building: string;
 
+  @AllowNull(true)
   @Column
-  @AllowNull
-  flat: string;
+  flat?: string;
+
+  @BelongsTo(() => User)
+  user: User;
+
+  @ForeignKey(() => User)
+  userId: number;
 }

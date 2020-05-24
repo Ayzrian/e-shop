@@ -4,31 +4,35 @@ import {INavLink} from '../../../interfaces/general';
 @Component({
   selector: 'app-admin-bar',
   templateUrl: './admin-bar.component.html',
-  styleUrls: ['./admin-bar.component.scss']
+  styleUrls: ['./admin-bar.component.scss'],
 })
 export class AdminBarComponent implements OnInit {
-  links: INavLink[] = [{
-    text: 'Orders',
-    route: 'orders',
-    icon: 'work'
-  }, {
-    text: 'Products',
-    route: 'products',
-    icon: 'ballot'
-  }, {
-    text: 'New Product',
-    route: 'new-product',
-    icon: 'add_circle'
-  }, {
-    text: 'Statistics',
-    route: 'statistics',
-    icon: 'assessment'
-  }];
+  links: INavLink[] = [
+    {
+      text: 'Заказы',
+      route: 'orders',
+      icon: 'work',
+    },
+    {
+      text: 'Продукты',
+      route: 'products',
+      icon: 'ballot',
+    },
+    {
+      text: 'Новый продукт',
+      route: 'new-product',
+      icon: 'add_circle',
+    },
+    {
+      text: 'Новый тип продукта',
+      route: 'new-type',
+      icon: 'add'
+    },
+  ];
 
   constructor() {
   }
 
   ngOnInit(): void {
   }
-
 }

@@ -1,0 +1,75 @@
+<section class="new-type">
+  <mat-card>
+    <mat-card-title>
+      Создать новый тип продукта
+    </mat-card-title>
+
+    <mat-card-content [formGroup]="form">
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>
+              Имя типа
+            </mat-label>
+            <input
+              type="text"
+              formControlName="type"
+              matInput
+              placeholder="Телефон..."
+            />
+          </mat-form-field>
+        </div>
+
+        <div>
+          Добавьте характеристики
+        </div>
+
+        <div
+          *ngFor="
+            let control of form.controls?.characteristicsDescriptors?.controls; index as i
+          "
+          class="characteristic-row"
+        >
+          <mat-form-field  class="characteristic-input">
+            <input
+              type="text"
+              [formControl]="control"
+              matInput
+              placeholder="Характеристика..."
+            />
+          </mat-form-field>
+          <button
+            mat-icon-button
+            class="remove-btn"
+            color="warn"
+            (click)="onRemoveCharacteristic(i)"
+            *ngIf="i !== 0"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+
+        <div class="row justify-content-center">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onAddCharacteristic()"
+          >
+            Добавить характеристику<mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+      <div class="row justify-content-center mt-3">
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="form.invalid"
+          (click)="onSubmit()"
+        >
+          Создать
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<app-loader [active]="loading"></app-loader>

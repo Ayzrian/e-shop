@@ -3,21 +3,21 @@
   <mat-card class="login-card">
     <mat-card-header>
       <mat-card-title class="login-card__title">
-        Login
+        Логин
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="loginForm" class="form">
         <mat-form-field>
-          <mat-label>Email*</mat-label>
-          <input type="email" matInput placeholder="Input your email..." formControlName="email">
+          <mat-label>Електронная почта*</mat-label>
+          <input type="email" matInput formControlName="email">
           <mat-icon matSuffix>email</mat-icon>
           <mat-error *ngIf="loginForm.controls.email.invalid">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Password*</mat-label>
-          <input type="password" matInput placeholder="Input your email..." formControlName="password">
+          <mat-label>Пароль*</mat-label>
+          <input type="password" matInput formControlName="password">
           <mat-icon matSuffix>remove_red_eye</mat-icon>
           <mat-error *ngIf="loginForm.controls.password.invalid">{{getPasswordErrorMessage()}}</mat-error>
         </mat-form-field>
@@ -27,7 +27,13 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="accent" [disabled]="this.loginForm.invalid">Send</button>
+      <button
+        mat-raised-button color="accent"
+        [disabled]="this.loginForm.invalid"
+        (click)="onSubmit()"
+      >
+        Send
+      </button>
     </mat-card-actions>
   </mat-card>
 

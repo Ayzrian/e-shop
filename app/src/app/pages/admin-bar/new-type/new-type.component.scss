@@ -1,0 +1,22 @@
+.new-type {
+  display: flex;
+  justify-content: center;
+}
+
+
+.characteristic-row {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.characteristic-input {
+  flex-grow: 1;
+
+  margin-right: 10px;
+}
+
+.remove-btn {
+  font-size: 1rem;
+
+}

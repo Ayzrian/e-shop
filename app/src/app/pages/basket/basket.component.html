@@ -1,84 +1,225 @@
-
 <section class="basket mt-5">
-  <mat-card>
+  <mat-card *ngIf="!wantToOrder && !createdOrder">
     <mat-card-header class="d-flex justify-content-center">
-      <h2>Your Basket</h2>
+      <h2>Ваша корзина</h2>
     </mat-card-header>
 
     <mat-card-content>
       <mat-list>
-        <mat-list-item>
+        <mat-list-item *ngIf="(items$ | async).length === 0">
+          <div mat-line class="text-center text-bold">
+            <h3>
+              Вы не пока еще не добавили не одного продукта в корзину.
+            </h3>
+          </div>
+        </mat-list-item>
+
+        <mat-list-item *ngFor="let item of items$ | async; index as i">
           <img
             matListAvatar
             class="mr-2"
-            src="https://i.citrus.ua/uploads/shop/a/1/a1b9d4beb6ca736693803475ae8fd57a.jpg"
+            src="{{ item.product.imagePath }}"
             alt=""
-          >
+          />
           <div
             class="d-flex justify-content-between align-items-center w-100"
             matline
           >
-            <span>Xiomi Redmi Note 8</span>
-            <div
-              class="d-flex align-items-center"
-            >
-              <button mat-icon-button>
+            <span>{{ item.product.brand }} {{ item.product.name }}</span>
+            <div class="d-flex align-items-center">
+              <button mat-icon-button (click)="onRemove(i)">
                 <mat-icon>
                   keyboard_arrow_left
                 </mat-icon>
               </button>
-              <div class="count">2</div>
-              <button mat-icon-button>
+              <div class="count">{{ item.amount }}</div>
+              <button mat-icon-button (click)="onAdd(i)">
                 <mat-icon>
                   keyboard_arrow_right
                 </mat-icon>
               </button>
             </div>
-            <span>155$</span>
+            <span>{{ item.product.price  * item.amount}}$</span>
           </div>
         </mat-list-item>
-
-        <mat-list-item>
-          <img
-            matListAvatar
-            class="mr-2"
-            src="https://i.citrus.ua/uploads/shop/a/1/a1b9d4beb6ca736693803475ae8fd57a.jpg"
-            alt=""
-          >
-          <div
-            class="d-flex justify-content-between align-items-center w-100"
-            matline
-          >
-            <span>Xiomi Redmi Note 2</span>
-            <div
-              class="d-flex align-items-center"
-            >
-              <button mat-icon-button>
-                <mat-icon>
-                  keyboard_arrow_left
-                </mat-icon>
-              </button>
-              <div class="count">1</div>
-              <button mat-icon-button>
-                <mat-icon>
-                  keyboard_arrow_right
-                </mat-icon>
-              </button>
-            </div>
-            <span>105$</span>
-          </div>
-        </mat-list-item>
-
       </mat-list>
 
       <div class="d-flex justify-content-end pr-3 mt-1">
-        Total: 260 $
+        Итого: {{ cost$ | async }} $
       </div>
     </mat-card-content>
 
     <mat-card-actions class="d-flex justify-content-center">
-      <button mat-raised-button color="accent">Buy</button>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="(items$ | async).length === 0"
+        (click)="onSubmit()"
+      >
+        Заказать
+      </button>
     </mat-card-actions>
   </mat-card>
 
+
+
+  <mat-card *ngIf="wantToOrder">
+    <mat-card-header>
+      <h2>
+        Заполните данные
+      </h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-vertical-stepper>
+        <mat-step [stepControl]="personalDataForm" editable>
+          <ng-template matStepLabel>Контактные данные</ng-template>
+          <form [formGroup]="personalDataForm">
+            <div>
+              <mat-form-field>
+                <mat-label>Имя</mat-label>
+                <input formControlName="firstName" matInput type="text" />
+                <mat-error *ngIf="isInvalid(personalDataForm, 'firstName')">
+                  {{ getErrorMessage(personalDataForm, "firstName") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Фамилия</mat-label>
+                <input formControlName="lastName" matInput type="text" />
+                <mat-error *ngIf="isInvalid(personalDataForm, 'lastName')">
+                  {{ getErrorMessage(personalDataForm, "lastName") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Електронная почта</mat-label>
+                <input formControlName="email" matInput type="email" />
+                <mat-error *ngIf="isInvalid(personalDataForm, 'email')">
+                  {{ getErrorMessage(personalDataForm, "email") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Номер Телефона</mat-label>
+                <input formControlName="phoneNumber" matInput type="text" />
+                <mat-error *ngIf="isInvalid(personalDataForm, 'phoneNumber')">
+                  {{ getErrorMessage(personalDataForm, "phoneNumber") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </form>
+
+          <div>
+            <button
+              mat-raised-button
+              matStepperNext
+              [disabled]="personalDataForm.invalid"
+            >
+              Дальше
+            </button>
+          </div>
+        </mat-step>
+
+        <mat-step [stepControl]="addressForm" editable>
+          <ng-template matStepLabel>Аддрес</ng-template>
+          <form [formGroup]="addressForm">
+            <div>
+              <mat-form-field>
+                <mat-label>Страна</mat-label>
+                <input formControlName="country" matInput type="text" />
+                <mat-error *ngIf="isInvalid(addressForm, 'country')">
+                  {{ getErrorMessage(addressForm, "country") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Город</mat-label>
+                <input formControlName="city" matInput type="text" />
+                <mat-error *ngIf="isInvalid(addressForm, 'city')">
+                  {{ getErrorMessage(addressForm, "city") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Улица</mat-label>
+                <input formControlName="street" matInput type="text" />
+                <mat-error *ngIf="isInvalid(addressForm, 'street')">
+                  {{ getErrorMessage(addressForm, "street") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Здание</mat-label>
+                <input formControlName="building" matInput type="text" />
+                <mat-error *ngIf="isInvalid(addressForm, 'building')">
+                  {{ getErrorMessage(addressForm, "building") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Квартира (опционально)</mat-label>
+                <input formControlName="flat" matInput type="text" />
+                <mat-error *ngIf="isInvalid(addressForm, 'flat')">
+                  {{ getErrorMessage(addressForm, "flat") }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </form>
+          <div>
+            <button
+              mat-raised-button matStepperNext
+              [disabled]="addressForm.invalid"
+            >
+              Дальше
+            </button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Подтвеждение</ng-template>
+          <div>
+            <button
+              mat-raised-button matStepperNext
+              color="accent"
+              [disabled]="addressForm.invalid && personalDataForm.invalid"
+              (click)="onSend()"
+            >
+              Оформить
+            </button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="createdOrder">
+    <mat-card-header>
+      <h2>
+        Поздравляем вы успешно оформили заказ!
+      </h2>
+    </mat-card-header>
+    <mat-card-content>
+         Номер вашего заказа <b>{{order.id}}</b>. Вы можете отслеживать по этому номеру.
+         Ожидайте в скором времени наш менеджер свяжется с вами.
+    </mat-card-content>
+  </mat-card>
+
 </section>
+
+<app-loader
+  [active]="loading"
+>
+</app-loader>
