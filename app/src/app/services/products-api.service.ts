@@ -17,6 +17,14 @@ export class ProductsApiService extends ApiService {
       .toPromise();
   }
 
+  updateProduct(product) {
+    return this.http.put(this.url('/products'), product).toPromise();
+  }
+
+  getMaxPrice() {
+    return this.http.get<number>(this.url('/products/max-price')).toPromise();
+  }
+
   createProduct(product: IProduct) {
     return this.http.post(this.url('/products'), product).toPromise();
   }

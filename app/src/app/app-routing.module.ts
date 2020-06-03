@@ -15,6 +15,7 @@ import {TrackOrderComponent} from './pages/track-order/track-order.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {IsAdminGuard} from './guards/is-admin.guard';
 import {IsAuthorizedGuard} from './guards/is-authorized.guard';
+import {EditProductComponent} from './pages/admin-bar/edit-product/edit-product.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,10 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent,
+      },
+      {
+        path: 'edit-product/:id',
+        component: EditProductComponent
       },
       {
         path: 'new-type',

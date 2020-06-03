@@ -4,8 +4,10 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
-  UploadedFile, UseGuards,
+  UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { CreateProductTypeDTO } from './dto/create-product-type.dto';
@@ -20,8 +22,7 @@ import { IsAdminGuard } from '../auth/guards/is-admin.guard';
 
 @Controller('products')
 export class ProductController {
-  constructor(private productService: ProductService) {
-  }
+  constructor(private productService: ProductService) {}
 
   @Get('types')
   getProductsTypes() {
@@ -44,9 +45,24 @@ export class ProductController {
     return this.productService.getProducts(query);
   }
 
+  @Put()
+  updateProduct(@Body() product: CreateProductDTO) {
+    return this.productService.updateProduct(product);
+  }
+
+  @Get('max-price')
+  getProductPrice() {
+    return this.productService.getMaxPrice();
+  }
+
   @Get(':productId')
   getProduct(@Param('productId') id: number) {
     return this.productService.getProductById(id);
+  }
+
+  @Get('/types/:typeId')
+  getProductTypeById(@Param('typeId') typeId: number) {
+    return this.productService.getProductById(typeId);
   }
 
   @UseGuards(JwtAuthGuard, IsAdminGuard)

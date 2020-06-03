@@ -14,6 +14,8 @@ export class ProductService {
   constructor(
     @InjectModel(ProductType) private productTypeModel: typeof ProductType,
     @InjectModel(Product) private productModel: typeof Product,
+    @InjectModel(Characteristic)
+    private characteristicModel: typeof Characteristic,
   ) {
   }
 
@@ -29,6 +31,39 @@ export class ProductService {
     });
   }
 
+  async updateProduct(product: CreateProductDTO): Promise<Product> {
+    const productModel = await this.getProductById(product.id);
+
+    await productModel.update({
+      name: product.name,
+      brand: product.brand,
+      price: product.price,
+    });
+
+    await Promise.all(
+      product.characteristics.map(({ id, value }) =>
+        this.characteristicModel.findByPk(id).then(found => {
+          found.value = value;
+
+          return found.save();
+        }),
+      ),
+    );
+
+    return this.getProductById(product.id);
+  }
+
+  getProductTypeById(id: number): Promise<ProductType> {
+    return this.productTypeModel.findByPk(id, {
+      include: [
+        {
+          model: Characteristic,
+          include: [CharacteristicDescriptor],
+        },
+      ],
+    });
+  }
+
   getProducts(query?: IProductsQuery): Promise<Product[]> {
     const options: any = {
       include: [ProductType],
@@ -37,7 +72,15 @@ export class ProductService {
     const where: any = {};
 
     if (query) {
-      const { name, brand, typeId, limit, offset } = query;
+      const {
+        name,
+        brand,
+        typeId,
+        limit,
+        offset,
+        price_gte,
+        price_lte,
+      } = query;
 
       if (name) {
         where.name = {
@@ -62,6 +105,12 @@ export class ProductService {
       if (offset) {
         options.offset = Number(offset);
       }
+
+      if (price_gte) {
+        where.price = {
+          [Op.gte]: price_gte,
+        };
+      }
     }
 
     return this.productModel.findAll({
@@ -85,5 +134,9 @@ export class ProductService {
     return this.productTypeModel.findAll({
       include: [CharacteristicDescriptor],
     });
+  }
+
+  getMaxPrice() {
+    return this.productModel.max('price');
   }
 }

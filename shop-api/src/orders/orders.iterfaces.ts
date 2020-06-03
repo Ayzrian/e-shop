@@ -5,9 +5,7 @@ export enum EOrderStatus {
   SHIPPING = "В дороге",
   PENDING_CONFIRMATION = "Ожидает подтверждения",
   PAID = "Оплачено",
-  REIMBURSE = "Возврат"
-}
-
-export interface ICreateOrderParams {
-
+  REIMBURSE = "Возврат средств",
+  CANCELLED = "Отменен",
+  RETURNED = "Возврат"
 }

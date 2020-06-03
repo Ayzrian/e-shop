@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  displayedColumns = ['type', 'name', 'brand', 'price'];
+  displayedColumns = ['type', 'name', 'brand', 'price', 'action'];
   productTypes: IProductType[] = [];
 
   filtersMeta: IFilter[] = [];

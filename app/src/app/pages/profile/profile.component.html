@@ -23,6 +23,12 @@
           История заказов
         </h2>
 
+        <div
+          *ngIf="user.orders.length === 0"
+        >
+          Вы пока не сделали не одного заказа
+        </div>
+
         <div *ngFor="let order of user.orders; let last = last;" class="pl-2 pr-2">
           <div>
             Номер Заказа: {{ order.id }}

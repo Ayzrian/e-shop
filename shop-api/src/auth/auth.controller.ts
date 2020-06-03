@@ -23,9 +23,6 @@ export class AuthController {
     return registeredUser.get({ plain: true });
   }
 
-  @Post('logout')
-  logout() {}
-
   @UseGuards(LocalAuthGuard)
   @Post('login')
   login(@Request() req) {

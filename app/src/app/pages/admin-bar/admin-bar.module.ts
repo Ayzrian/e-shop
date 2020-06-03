@@ -22,6 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {ComponentsModule} from '../../components/components.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {EditProductComponent} from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     NewProductComponent,
     StatisticsComponent,
     NewTypeComponent,
+    EditProductComponent,
   ],
   imports: [
     ComponentsModule,

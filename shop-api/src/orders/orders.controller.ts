@@ -23,7 +23,6 @@ export class OrdersController {
     return this.ordersService.getOrderById(orderId);
   }
 
-  @UseGuards(JwtAuthGuard, IsAdminGuard)
   @Post()
   createOrder(@Body() order: CreateOrderDTO) {
     return this.ordersService.createOrder(order);

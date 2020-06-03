@@ -1,0 +1,62 @@
+
+<div class="edit-product">
+
+  <mat-card class="card">
+    <mat-card-title class="text-center mb-3">
+      Отредактировать продукт
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <div [formGroup]="form">
+          <div class="text-center mb-2"> Введите общие сведенъя продукта</div>
+
+          <mat-form-field class="w-100">
+            <mat-label>Введите имя продукта</mat-label>
+            <input type="text" matInput formControlName="name">
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>Введите цену продукта</mat-label>
+            <input type="text" matInput formControlName="price">
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>Введите бренд продукта</mat-label>
+            <input type="text" matInput formControlName="brand">
+          </mat-form-field>
+
+          <div class="text-center"> Введите характеристики продукта</div>
+
+          <mat-form-field
+            class="w-100"
+            *ngFor="let characteristic of product.characteristics"
+          >
+            <mat-label>Введите характериситку {{characteristic.descriptor.name}}</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControlName]="characteristic.descriptor.name"
+            >
+          </mat-form-field>
+        </div>
+
+        <div
+          class="mt-3 row justify-content-center"
+        >
+          <button
+            mat-raised-button color="accent"
+            [disabled]="form.invalid"
+            (click)="onSave()"
+          >
+            Создать
+          </button>
+        </div>
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<app-loader [active]="loading"></app-loader>

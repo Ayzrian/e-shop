@@ -19,15 +19,15 @@ import {CatalogModule} from './pages/catalog/catalog.module';
 import {AdminBarModule} from './pages/admin-bar/admin-bar.module';
 import {ProductModule} from './pages/product/product.module';
 import {MatBadgeModule} from '@angular/material/badge';
-import {TrackOrderComponent} from './pages/track-order/track-order.component';
 import {TrackOrderModule} from './pages/track-order/track-order.module';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {ProfileModule} from './pages/profile/profile.module';
+import {EmailValidator} from './validators/email.validator';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, EmailValidator],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -53,19 +53,21 @@ import {ProfileModule} from './pages/profile/profile.module';
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
-      useClass: AuthInterceptor
+      useClass: AuthInterceptor,
     },
     {
-      provide: MatPaginatorIntl, useFactory: () => {
+      provide: MatPaginatorIntl,
+      useFactory: () => {
         const intl = new MatPaginatorIntl();
 
         intl.itemsPerPageLabel = 'Количество записей на странице ';
 
         return intl;
-      }
+      },
     },
     {
-      provide: MAT_DATE_LOCALE, useValue: 'ru-RU'
+      provide: MAT_DATE_LOCALE,
+      useValue: 'ru-RU',
     },
     {
       provide: STEPPER_GLOBAL_OPTIONS,

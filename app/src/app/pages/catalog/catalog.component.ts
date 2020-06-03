@@ -34,7 +34,7 @@ export class CatalogComponent implements OnInit {
 
     await this.fetchProducts({...this.filtersQuery, ...this.pageSettings});
     this.productTypes = await this.productsApiService.getProductTypes();
-    this.initFilter();
+    await this.initFilter();
 
     this.loading = false;
   }
@@ -43,7 +43,7 @@ export class CatalogComponent implements OnInit {
     return product.id;
   }
 
-  initFilter() {
+  async initFilter() {
     this.filtersMeta = [
       {
         type: 'text',
@@ -58,6 +58,14 @@ export class CatalogComponent implements OnInit {
         label: 'Бренд продукта',
         selectedValue: null,
         queryField: 'brand',
+      },
+      {
+        type: 'range',
+        name: 'Цена продукта',
+        label: 'Цена продукта больше',
+        selectedValue: 0,
+        queryField: 'price_gte',
+        max: await this.productsApiService.getMaxPrice()
       },
       {
         type: 'select',

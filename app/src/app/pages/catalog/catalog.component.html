@@ -26,7 +26,7 @@
           <mat-card-title>{{ product.name }}</mat-card-title>
           <mat-card-subtitle class="subtitle">{{
             product.brand
-            }}</mat-card-subtitle>
+          }}</mat-card-subtitle>
         </mat-card-header>
 
         <img
@@ -42,14 +42,17 @@
               color="primary"
               [routerLink]="['/product', product.id]"
             >
-              Details
+              Детали
             </button>
           </div>
           <b class="price">{{ product.price }}$</b>
         </mat-card-actions>
       </mat-card>
 
-      <div class="row w-100 justify-content-center" *ngIf="products.length > 0">
+      <div
+        class="row w-100 justify-content-center"
+        *ngIf="products.length > 0 && (pageSettings.offset + itemsPerBatch) / itemsPerBatch === 0"
+      >
         <button mat-raised-button color="accent" (click)="onLoadMore()">
           Загрузить еще
         </button>

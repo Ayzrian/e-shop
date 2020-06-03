@@ -14,8 +14,7 @@ import { OrderProduct } from '../orders/models/order-product.model';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private userModel: typeof User) {
-  }
+  constructor(@InjectModel(User) private userModel: typeof User) {}
 
   findUserByEmail(email: string): Promise<User> {
     return this.userModel.findOne({
@@ -28,10 +27,15 @@ export class UsersService {
 
   findUserById(id: number): Promise<User> {
     return this.userModel.findByPk(id, {
-      include: [Role, Address, Card, {
-        model: Order,
-        include: [OrderStatus, OrderProduct]
-      }],
+      include: [
+        Role,
+        Address,
+        Card,
+        {
+          model: Order,
+          include: [OrderStatus, OrderProduct],
+        },
+      ],
     });
   }
 
@@ -45,6 +49,18 @@ export class UsersService {
     const user = await this.findUserById(id);
 
     return user.addresses;
+  }
+
+  isUserExists(email: string) {
+    return this.userModel
+      .count({
+        where: {
+          email,
+        },
+      })
+      .then(count => {
+        return count >= 1;
+      });
   }
 
   async registerUser(user: RegisterUserDto): Promise<User> {

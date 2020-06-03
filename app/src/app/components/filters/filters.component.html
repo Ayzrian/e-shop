@@ -23,6 +23,28 @@
         </button>
       </ng-container>
 
+      <ng-container *ngSwitchCase="'range'">
+        <div class="w-100">
+          <div>{{ filter.label }}</div>
+
+          <div>
+            <mat-slider
+              class="w-100"
+              step="5"
+              min="0"
+              max="{{filter.max}}"
+              thumbLabel
+              [(ngModel)]="filter.selectedValue"
+              (ngModelChange)="onChange()"
+            >
+            </mat-slider>
+          </div>
+        </div>
+        <button color="accent" mat-raised-button (click)="onSearch()">
+          Искать
+        </button>
+      </ng-container>
+
       <ng-container *ngSwitchCase="'select'">
         <mat-form-field class="w-100">
           <mat-label>{{ filter.label }}</mat-label>

@@ -38,7 +38,6 @@ export class AuthService extends ApiService {
 
     localStorage.setItem('user', JSON.stringify(user));
 
-
     this.currentUser$.next(user);
 
     return user;
@@ -46,6 +45,14 @@ export class AuthService extends ApiService {
 
   getToken() {
     return this.token;
+  }
+
+  async updateUser() {
+    const user = await this.http.get<IUser>(this.url('/users/me')).toPromise();
+
+    localStorage.setItem('user', JSON.stringify(user));
+
+    this.currentUser$.next(user);
   }
 
   async register(user: IUser) {

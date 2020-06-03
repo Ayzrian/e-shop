@@ -20,10 +20,13 @@ export class FiltersComponent implements OnInit {
     this.lastQuery = this.filters
       .filter((filter) => Boolean(filter.selectedValue))
       .reduce(
-        (accQuery, {queryField, selectedValue}) => ({
-          ...accQuery,
-          [queryField]: selectedValue,
-        }),
+        (accQuery, {type, queryField, selectedValue}) => {
+          return {
+            ...accQuery,
+            [queryField]: selectedValue,
+          };
+        },
+
         {}
       );
 
@@ -31,10 +34,15 @@ export class FiltersComponent implements OnInit {
   }
 
   onSelectChange() {
-    setTimeout(() => {
-      this.onChange();
-      this.onSearch();
-    }, 250);
+    setTimeout(
+      () => {
+        this.onChange();
+
+        this.onSearch();
+      },
+
+      250
+    );
   }
 
   onSearch() {
