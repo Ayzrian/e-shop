@@ -25,6 +25,16 @@ export class ProductsApiService extends ApiService {
     return this.http.get<number>(this.url('/products/max-price')).toPromise();
   }
 
+  getPopularProducts(query) {
+    return this.http
+      .get<any[]>(this.url('/products/popular'), {
+        params: new HttpParams({
+          fromObject: query,
+        }),
+      })
+      .toPromise();
+  }
+
   createProduct(product: IProduct) {
     return this.http.post(this.url('/products'), product).toPromise();
   }

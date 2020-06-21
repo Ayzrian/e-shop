@@ -59,8 +59,6 @@ export class AuthService extends ApiService {
     const registeredUser = await this.http
       .post<IUser>(this.url('/sign-up'), user)
       .toPromise();
-
-    this.currentUser$.next(registeredUser);
   }
 
   logout() {

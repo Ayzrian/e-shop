@@ -41,6 +41,11 @@ export class NewProductComponent implements OnInit {
       this.buildForm();
     }
 
+    this.form.valueChanges.pipe().subscribe((data) => {
+      console.log(data);
+
+    })
+
     this.loading = false;
   }
 
@@ -66,7 +71,7 @@ export class NewProductComponent implements OnInit {
     productType.characteristicsDescriptors.forEach(({name}) => {
       this.form.registerControl(
         name,
-        new FormControl('', [Validators.required, Validators.min(3)])
+        new FormControl('', [Validators.required, Validators.min(2)])
       );
     });
   }

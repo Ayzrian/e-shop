@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {BasketService} from './basket.service';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {IBasketItem, IOrder} from '../../interfaces/basket.interfaces';
-import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as moment from 'moment';
-import {AuthService} from '../../services/auth.service';
-import {IUser} from '../../interfaces/users.interfaces';
-import {NotificationService} from '../../utilities/notification.service';
+import { Component, OnInit } from "@angular/core";
+import { BasketService } from "./basket.service";
+import { BehaviorSubject, Observable } from "rxjs";
+import { IBasketItem, IOrder } from "../../interfaces/basket.interfaces";
+import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import * as moment from "moment";
+import { AuthService } from "../../services/auth.service";
+import { IUser } from "../../interfaces/users.interfaces";
+import { NotificationService } from "../../utilities/notification.service";
 
 @Component({
-  selector: 'app-basket',
-  templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.scss'],
+  selector: "app-basket",
+  templateUrl: "./basket.component.html",
+  styleUrls: ["./basket.component.scss"],
 })
 export class BasketComponent implements OnInit {
   items$: BehaviorSubject<IBasketItem[]>;
@@ -29,8 +29,7 @@ export class BasketComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private notificationService: NotificationService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.items$ = this.basketService.getProducts();
@@ -40,7 +39,7 @@ export class BasketComponent implements OnInit {
     this.user$.subscribe((user) => {
       this.personalDataForm = this.fb.group({
         firstName: [
-          '',
+          "",
           [
             Validators.required,
             Validators.minLength(3),
@@ -48,16 +47,16 @@ export class BasketComponent implements OnInit {
           ],
         ],
         lastName: [
-          '',
+          "",
           [
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(20),
           ],
         ],
-        email: ['', [Validators.required, Validators.email]],
+        email: ["", [Validators.required, Validators.email]],
         phoneNumber: [
-          '',
+          "",
           [
             Validators.required,
             Validators.minLength(3),
@@ -67,11 +66,11 @@ export class BasketComponent implements OnInit {
       });
 
       this.addressForm = this.fb.group({
-        country: ['', [Validators.required, Validators.minLength(3)]],
-        city: ['', [Validators.required, Validators.minLength(3)]],
-        street: ['', [Validators.required, Validators.minLength(3)]],
-        building: ['', [Validators.required, Validators.minLength(1)]],
-        flat: [''],
+        country: ["", [Validators.required, Validators.minLength(3)]],
+        city: ["", [Validators.required, Validators.minLength(3)]],
+        street: ["", [Validators.required, Validators.minLength(3)]],
+        building: ["", [Validators.required, Validators.minLength(1)]],
+        flat: [""],
       });
 
       if (user) {
@@ -85,12 +84,16 @@ export class BasketComponent implements OnInit {
           sex,
           createdAt,
           updatedAt,
+          password,
+          orders,
           ...value
         } = user;
 
         this.personalDataForm.setValue(value);
 
-        const [{id: adId, ...address}] = user.addresses;
+        const [
+          { id: adId, userId, createdAt: a, updatedAt: b, ...address },
+        ] = user.addresses;
 
         if (address) {
           this.addressForm.setValue(address);
@@ -126,7 +129,7 @@ export class BasketComponent implements OnInit {
       this.createdOrder = true;
     } catch (e) {
       this.notificationService.notify(
-        'Упс. Кажется что-то пошло не так. Обратитесь в службу поддержки.'
+        "Упс. Кажется что-то пошло не так. Обратитесь в службу поддержки."
       );
     } finally {
       this.loading = false;
@@ -168,7 +171,7 @@ export class BasketComponent implements OnInit {
 
   isNeededToCreateNewUser() {
     const user = this.user$.value;
-    const {value} = this.personalDataForm;
+    const { value } = this.personalDataForm;
 
     if (user) {
       return (
@@ -184,7 +187,7 @@ export class BasketComponent implements OnInit {
 
   isNeededToCreateNewAddress() {
     const user = this.user$.value;
-    const {value} = this.addressForm;
+    const { value } = this.addressForm;
 
     if (user) {
       const [address] = user.addresses;
@@ -212,22 +215,22 @@ export class BasketComponent implements OnInit {
     minLength = 3,
     maxLength = 20
   ): string {
-    const {errors} = form.controls[control];
+    const { errors } = form.controls[control];
     if (errors) {
       if (errors.required) {
-        return 'Это поле обязательное!';
+        return "Это поле обязательное!";
       }
 
       if (errors.minlength) {
-        return 'Минимальная длина этого поля = ' + minLength;
+        return "Минимальная длина этого поля = " + minLength;
       }
 
       if (errors.maxlength) {
-        return 'Максимальная длина этого поля = ' + maxLength;
+        return "Максимальная длина этого поля = " + maxLength;
       }
 
       if (errors.email) {
-        return 'Введите пожалуйста валидный електронный адрес';
+        return "Введите пожалуйста валидный електронный адрес";
       }
     }
   }

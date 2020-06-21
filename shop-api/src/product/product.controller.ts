@@ -19,10 +19,37 @@ import { diskStorage } from 'multer';
 import { IProductsQuery } from './product.interfaces';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { IsAdminGuard } from '../auth/guards/is-admin.guard';
+import * as mysql from 'mysql2/promise'
 
 @Controller('products')
 export class ProductController {
   constructor(private productService: ProductService) {}
+
+
+  @Get('/popular')
+  async getPopularProducts(@Query() query) {
+    const connection = await mysql.createConnection({
+      host: 'mysql',
+      user: 'root',
+      password: 'root',
+      database: 'app'
+    })
+
+    const [rows] = await connection.execute(`
+      SELECT name, SUM(priceAtTheMomentOfOrder * amount) as totalRevenue FROM Products
+      INNER JOIN OrderProducts on OrderProducts.productId = Products.id
+      INNER JOIN Orders as o on OrderProducts.orderId = o.id
+      GROUP BY productId, name, o.createdAt
+      HAVING o.createdAt < ? && o.createdAt > ?
+      ORDER BY totalRevenue ASC;
+    `, [query.created_lt, query.created_gt ])
+
+
+    await connection.close();
+
+    return rows;
+  }
+
 
   @Get('types')
   getProductsTypes() {

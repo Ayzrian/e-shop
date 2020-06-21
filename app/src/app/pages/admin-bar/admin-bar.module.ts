@@ -23,6 +23,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {ComponentsModule} from '../../components/components.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {EditProductComponent} from './edit-product/edit-product.component';
+import { PopularComponent } from './popular/popular.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import {EditProductComponent} from './edit-product/edit-product.component';
     StatisticsComponent,
     NewTypeComponent,
     EditProductComponent,
+    PopularComponent,
   ],
   imports: [
     ComponentsModule,
@@ -53,6 +56,7 @@ import {EditProductComponent} from './edit-product/edit-product.component';
     MatCardModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatDatepickerModule,
   ],
 })
 export class AdminBarModule {

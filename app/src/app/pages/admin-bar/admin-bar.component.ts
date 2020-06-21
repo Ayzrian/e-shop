@@ -28,6 +28,11 @@ export class AdminBarComponent implements OnInit {
       route: 'new-type',
       icon: 'add'
     },
+    {
+      text: 'Популярные продукты',
+      route: 'popular',
+      icon: 'analytics'
+    },
   ];
 
   constructor() {

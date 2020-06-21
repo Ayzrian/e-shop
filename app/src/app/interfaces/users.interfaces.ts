@@ -15,6 +15,7 @@ export interface IUser {
   roleId: number;
   phoneNumber: string;
   createdAt?: Date;
+  password?: string;
   updatedAt?: Date;
   role?: IRole;
   addresses: IAddress[];
@@ -31,11 +32,14 @@ export interface IMinimalUser {
 
 export interface IAddress {
   id?: number;
+  userId?: number;
   country: string;
   city: string;
   street: string;
   building: string;
   flat?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface ICard {

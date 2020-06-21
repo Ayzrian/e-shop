@@ -162,7 +162,7 @@ export class SignUpComponent implements OnInit {
 
     this.notificationService.notify('Вы успешно зарегестрировались!');
 
-    this.router.navigate(['/catalog']);
+    this.router.navigate(['/login']);
 
     this.personalDataForm.reset();
     this.addressForm.reset();
