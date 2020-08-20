@@ -29,7 +29,7 @@
     "@nestjs/sequelize": "^0.1.0",
     "@nestjs/serve-static": "^2.1.0",
     "@types/multer": "^1.4.3",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "chance": "^1.1.5",
     "cors": "^2.8.5",
     "multer": "^1.4.2",
